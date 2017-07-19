@@ -17,7 +17,7 @@ module GoldenRecord
     #   facet.threads
 
     class FieldFacet < FacetBase
-      SORT_TYPE = [:count, :index]
+      SORT_TYPE = ["count", "index"]
 
       def initialize(field, sort: nil, mincount: nil, limit: nil, offset: nil)
         @field = field
@@ -31,8 +31,8 @@ module GoldenRecord
         param = super.merge(:"facet.field" => @field)
 
         if @sort
-          if SORT_TYPE.include?(@sort.to_sym)
-            param[facet_param_name("sort")] = @sort
+          if SORT_TYPE.include?(@sort.to_s)
+            param[facet_param_name("sort")] = @sort.to_s
           else
             raise(ArgumentError, "sort type should be #{SORT_TYPE.join(' or ')}.")
           end

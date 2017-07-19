@@ -10,7 +10,7 @@ module GoldenRecord
       end
 
       def build
-        { facet: true }
+        { facet: "true" }
       end
 
       private
