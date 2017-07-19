@@ -33,6 +33,16 @@ describe GoldenRecord::Parameter::Pagination do
       end
     end
 
+    context "when page is less than 1" do
+      let(:page) do
+        0
+      end
+
+      it "raises an error" do
+        expect{ pagination }.to raise_error(ArgumentError, /page/)
+      end
+    end
+
     context "when per_page is nil" do
       let(:per_page) do
         nil
@@ -41,6 +51,16 @@ describe GoldenRecord::Parameter::Pagination do
       it "uses default value" do
         expect(pagination[:start]).to eq(20)
         expect(pagination[:rows]).to eq(10)
+      end
+    end
+
+    context "when per_page is less than 1" do
+      let(:per_page) do
+        0
+      end
+
+      it "raises an error" do
+        expect{ pagination }.to raise_error(ArgumentError, /per_page/)
       end
     end
 
