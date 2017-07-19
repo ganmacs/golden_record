@@ -1,4 +1,5 @@
 require "rsolr"
+require "date"
 
 module GoldenRecord
   module Value
