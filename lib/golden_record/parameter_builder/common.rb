@@ -5,22 +5,22 @@ module GoldenRecord
     class Common < Base
       def initialize(opt = {})
         super
-        @common_query = GoldenRecord::Query::Common.new
-        @queries = [@common_query]
+        @common_params = GoldenRecord::Parameters::Common.new
+        @queries = [@common_params]
       end
 
       def sort_by(name, direction = nil)
-        @common_query.sort_by(name, direction)
+        @common_params.add_sort_by(name, direction)
         self
       end
 
       def pagination(page: nil, per_page: nil, offset: nil)
-        @common_query.pagination(page: page, per_page: per_page, offset: offset)
+        @common_params.add_pagination(page: page, per_page: per_page, offset: offset)
         self
       end
 
       def field_list(*list)
-        @common_query.field_list(*list)
+        @common_params.add_field_list(*list)
         self
       end
     end

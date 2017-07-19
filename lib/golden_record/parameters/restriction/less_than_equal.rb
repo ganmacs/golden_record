@@ -1,7 +1,7 @@
-require "golden_record/query/restriction/base"
+require "golden_record/parameters/restriction/base"
 
 module GoldenRecord
-  module Query
+  module Parameters
     module Restriction
       class LessThanEqual < Base
         private

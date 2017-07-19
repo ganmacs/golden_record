@@ -1,7 +1,7 @@
-require "golden_record/query/base"
+require "golden_record/parameters/base"
 
 module GoldenRecord
-  module Query
+  module Parameters
     # http://lucene.apache.org/solr/guide/6_6/faceting.html
     class Facet < Base
       def field_facet(field, opt)

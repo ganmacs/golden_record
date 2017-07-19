@@ -1,8 +1,8 @@
-require "golden_record/query/restriction"
-require "golden_record/query/base"
+require "golden_record/parameters/restriction"
+require "golden_record/parameters/base"
 
 module GoldenRecord
-  module Query
+  module Parameters
     class BooleanOperator < Base
       def initialize
         super
@@ -55,11 +55,13 @@ module GoldenRecord
       def add_restriction(field, value = nil, negated = false)
         type_class =
           case value
-          when Range then GoldenRecord::Query::Restriction::Between
-          when Array then GoldenRecord::Query::Restriction::Any
-          else GoldenRecord::Query::Restriction::EqaulTo
+          when Range then GoldenRecord::Parameters::Restriction::Between
+          when Array then GoldenRecord::Parameters::Restriction::Any
+          else GoldenRecord::Parameters::Restriction::EqaulTo
           end
-        @components << type_class.new(field, value, negated)
+        type_class.new(field, value, negated).tap do |v|
+          @components << v
+        end
       end
 
       def negate(v)

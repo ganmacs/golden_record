@@ -1,7 +1,7 @@
 require "rsolr"
 
 module GoldenRecord
-  module Query
+  module Parameters
     module Restriction
       class Base
         RESERVED_WORDS = Set["AND", "OR", "NOT"]
