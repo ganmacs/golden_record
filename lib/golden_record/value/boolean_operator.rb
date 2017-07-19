@@ -1,11 +1,11 @@
-require "golden_record/parameters/restriction"
-require "golden_record/parameters/base"
+require "golden_record/value/restriction"
+require "golden_record/value/base"
 
 module GoldenRecord
-  module Parameters
+  module Value
     class BooleanOperator < Base
       def initialize
-        super
+        @components = []
         yield(self) if block_given?
       end
 
@@ -38,33 +38,28 @@ module GoldenRecord
         nop
       end
 
-      def to_param
+      def build
         case @components.size
         when 0
         # nothing
         when 1
-          @components.first.to_param
+          @components.first.build
         else
-          v = @components.map(&:to_param).join(" #{operator} ")
+          v = @components.map(&:build).join(" #{operator} ")
           "(#{v})"
         end
       end
 
-      private
-
       def add_restriction(field, value = nil, negated = false)
         type_class =
           case value
-          when Range then GoldenRecord::Parameters::Restriction::Between
-          when Array then GoldenRecord::Parameters::Restriction::Any
-          else GoldenRecord::Parameters::Restriction::EqaulTo
+          when Range then GoldenRecord::Value::Restriction::Between
+          when Array then GoldenRecord::Value::Restriction::Any
+          else GoldenRecord::Value::Restriction::EqualTo
           end
         type_class.new(field, value, negated).tap do |v|
           @components << v
         end
-      end
-
-      def negate(v)
       end
 
       def operator
@@ -93,7 +88,7 @@ module GoldenRecord
         @cond = cond
       end
 
-      def to_param
+      def build
         "-#{cond.to_param}"
       end
     end

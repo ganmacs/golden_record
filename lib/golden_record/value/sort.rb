@@ -1,3 +1,4 @@
+require "golden_record/value/base"
 require "golden_record/parameter/base"
 
 module GoldenRecord

@@ -1,9 +1,9 @@
 require "rsolr"
 
 module GoldenRecord
-  module Parameters
+  module Value
     module Restriction
-      class Base
+      class Base < GoldenRecord::Value::Base
         RESERVED_WORDS = Set["AND", "OR", "NOT"]
         # http://lucene.apache.org/solr/guide/6_6/the-standard-query-parser.html#TheStandardQueryParser-SpecifyingDatesandTimes
         SOLR_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
@@ -14,22 +14,22 @@ module GoldenRecord
           @negated = negated
         end
 
-        def to_param
+        def build
           if @negated
-            generate_with_negative
+            build_with_negative
           else
-            generate_with_positive
+            build_with_positive
           end
         end
 
         private
 
-        def generate_with_positive
+        def build_with_positive
           "#{@field}:#{solr_value}"
         end
 
-        def generate_with_negative
-          "-#{generate_with_positive}"
+        def build_with_negative
+          "-#{build_with_positive}"
         end
 
         def solr_value(value = @value)

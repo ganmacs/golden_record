@@ -1,4 +1,3 @@
-require "golden_record/parameters/boolean_operator"
 require "golden_record/parameters/facet"
 require "golden_record/parameters/standard"
 require "golden_record/parameters/common"

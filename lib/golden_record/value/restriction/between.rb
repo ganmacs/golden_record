@@ -1,7 +1,7 @@
-require "golden_record/parameters/restriction/base"
+require "golden_record/value/restriction/base"
 
 module GoldenRecord
-  module Parameters
+  module Value
     module Restriction
       class Between < Base
         private
