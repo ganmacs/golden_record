@@ -9,7 +9,11 @@ module GoldenRecord
       end
 
       def build
-        { fl: @list.join(",") }
+        if @list.empty?
+          { fl: "*" }
+        else
+          { fl: @list.join(",") }
+        end
       end
     end
   end
