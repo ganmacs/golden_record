@@ -3,6 +3,7 @@ require "golden_record/parameter/base"
 module GoldenRecord
   module Parameter
     class Query < Base
+      # http://lucene.apache.org/solr/guide/6_6/the-standard-query-parser.html#TheStandardQueryParser-StandardQueryParserParameters
       def initialize(q)
         @q = q
       end

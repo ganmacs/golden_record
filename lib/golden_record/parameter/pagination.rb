@@ -2,14 +2,16 @@ require "golden_record/parameter/base"
 
 module GoldenRecord
   module Parameter
+    # http://lucene.apache.org/solr/guide/6_6/common-query-parameters.html#CommonQueryParameters-ThestartParameter
+    # http://lucene.apache.org/solr/guide/6_6/common-query-parameters.html#CommonQueryParameters-TherowsParameter
     class Pagination
       DEFAULT_PAGE = 1
-      DEFAULT_PER_PAGE = 1
+      DEFAULT_PER_PAGE = 10
       DEFAULT_OFFSET = 0
 
       attr_writer :page, :per_page
 
-      def initialize(page = nil, per_page = nil, offset = nil)
+      def initialize(page: nil, per_page: nil, offset: nil)
         @page = page
         @per_page = per_page
         @offset = offset
