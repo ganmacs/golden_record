@@ -10,25 +10,27 @@ module GoldenRecord
         @components << @sort
       end
 
-      def field_list(*list)
-        @components << GoldenRecord::Parameter::FieldList.new(list)
+      def add_field_list(*list)
+        GoldenRecord::Parameter::FieldList.new(list).tap do |v|
+          @components << v
+        end
       end
 
-      def sort_by(name, direction = nil)
+      def add_sort_by(name, direction = nil)
         @sort << GoldenRecord::Value::Sort.new(name, direction)
-        self
+        @sort
       end
 
-      def pagination(page: nil, per_page: nil, offset: nil)
+      def add_pagination(page: nil, per_page: nil, offset: nil)
         if @pagination
           @pagination.page = page
           @pagination.per_page = per_page
           @pagination.offset = offset
         else
-          @pagination = GoldenRecord::Parameter::Pagination.new(page, per_page, offset)
+          @pagination = GoldenRecord::Parameter::Pagination.new(page: page, per_page: per_page, offset: offset)
           @components << @pagination
         end
-        self
+        @pagination
       end
     end
   end
