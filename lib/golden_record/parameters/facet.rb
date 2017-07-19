@@ -11,7 +11,7 @@ module GoldenRecord
       end
 
       def add_range_facet(field, range:, gap:, **opt)
-        GoldenRecord::Parameter::RangeFacet.new(field, opt.merge(range: range, gap: gap)).tap do |v|
+        GoldenRecord::Parameter::RangeFacet.new(field, range: range, gap: gap, **opt).tap do |v|
           @components << v
         end
       end

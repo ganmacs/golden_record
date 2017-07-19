@@ -8,7 +8,7 @@ module GoldenRecord
 
       def build
         params = {}
-        @queries.map(&:to_param).each do |e|
+        @queries.map(&:build).each do |e|
           params.merge!(e)
         end
         params

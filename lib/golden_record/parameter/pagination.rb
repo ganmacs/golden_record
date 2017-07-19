@@ -9,7 +9,7 @@ module GoldenRecord
       DEFAULT_PER_PAGE = 10
       DEFAULT_OFFSET = 0
 
-      attr_writer :page, :per_page
+      attr_writer :page, :per_page, :offset
 
       def initialize(page: nil, per_page: nil, offset: nil)
         @page = page
@@ -29,6 +29,7 @@ module GoldenRecord
 
       def page
         if @page
+          raise ArgumentError.new("page should be greater than 0") if @page.to_i <= 0
           @page.to_i
         else
           DEFAULT_PAGE
@@ -37,6 +38,7 @@ module GoldenRecord
 
       def per_page
         if @per_page
+          raise ArgumentError.new("per_page should be greater than 0") if @per_page.to_i <= 0
           @per_page.to_i
         else
           DEFAULT_PER_PAGE
